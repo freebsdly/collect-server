@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_host_files")
-public class File {
+public class FileDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -16,6 +16,6 @@ public class File {
 
     @ManyToOne
     @JoinColumn(name = "host_id")
-    private Host host;
+    private HostDAO host;
 
 }

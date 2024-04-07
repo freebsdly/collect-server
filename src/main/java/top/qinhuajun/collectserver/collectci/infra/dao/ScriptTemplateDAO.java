@@ -8,10 +8,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_script_templates")
-public class ScriptTemplate {
+public class ScriptTemplateDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private String content;
 
 }

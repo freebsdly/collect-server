@@ -12,20 +12,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Host {
+public class HostDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 100)
     private String hostname;
 
-    @Column(columnDefinition = "cidr")
+    @Column(length = 50)
     @NotBlank
     @NotEmpty
     @NotNull
     private String ip;
 
+    @NotEmpty
+    @NotNull
     @Column(length = 50)
     private String app;
 

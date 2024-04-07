@@ -1,17 +1,12 @@
 package top.qinhuajun.collectserver.collectci.api.query.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public record PayloadVo<T>(int code, String message, T data) {
 
-import java.io.Serializable;
+    public static <R> PayloadVo<R> success(R data) {
+        return new PayloadVo<>(0, "success", data);
+    }
 
-@Data
-@AllArgsConstructor
-public class PayloadVo<T> implements Serializable {
-
-    int code;
-
-    String message;
-
-    T data;
+    public static <R> PayloadVo<R> failed(int code, R data) {
+        return new PayloadVo<>(code, "failed", data);
+    }
 }
