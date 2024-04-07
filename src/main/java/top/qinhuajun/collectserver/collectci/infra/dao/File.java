@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.repository.entity;
+package top.qinhuajun.collectserver.collectci.infra.dao;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_collect_files")
-public class CollectFile {
+@Table(name = "tb_host_files")
+public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)

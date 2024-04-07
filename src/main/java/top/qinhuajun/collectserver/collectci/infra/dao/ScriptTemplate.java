@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.repository.entity;
+package top.qinhuajun.collectserver.collectci.infra.dao;
 
 import jakarta.persistence.*;
 import lombok.Getter;

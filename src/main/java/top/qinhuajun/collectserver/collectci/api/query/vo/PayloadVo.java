@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.api.vo;
+package top.qinhuajun.collectserver.collectci.api.query.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class Payload<T> implements Serializable {
+public class PayloadVo<T> implements Serializable {
 
     int code;
 
