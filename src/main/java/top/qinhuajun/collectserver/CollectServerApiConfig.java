@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import top.qinhuajun.collectserver.collectci.api.query.vo.PayloadVo;
+import top.qinhuajun.collectserver.common.vo.PayloadVO;
 
 import java.util.Arrays;
 
@@ -15,8 +15,8 @@ public class CollectServerApiConfig {
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
-    public PayloadVo<String> HandleGlobalException(Exception ex) {
+    public PayloadVO<String> HandleGlobalException(Exception ex) {
         log.error(Arrays.toString(ex.getStackTrace()));
-        return new PayloadVo<>(1, "failed", ex.getMessage());
+        return new PayloadVO<>(1, "failed", ex.getMessage());
     }
 }

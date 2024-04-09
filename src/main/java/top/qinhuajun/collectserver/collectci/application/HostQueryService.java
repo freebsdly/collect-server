@@ -25,13 +25,11 @@ public class HostQueryService {
     }
 
     public HostDTO queryHost(Long id) {
-        log.debug("query options: {}", id);
-        HostDAO host = hostRepository.findById(id).orElseThrow(() -> new RuntimeException("can not find host"));
+        HostDAO host = hostRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("can not find host by id: %s", id)));
         return DTOMapper.INSTANCE.toDto(host);
     }
 
     public Page<HostDTO> queryHosts(HostQueryDTO query) {
-        log.debug("query options: {}", query);
         PageRequest pageRequest = PageRequest.of(query.getPageNum(), query.getPageSize());
         BooleanBuilder builder = new BooleanBuilder();
         QHostDAO hostModel = QHostDAO.hostDAO;

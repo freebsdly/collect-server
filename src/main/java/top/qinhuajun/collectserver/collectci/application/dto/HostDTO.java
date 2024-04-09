@@ -1,8 +1,11 @@
 package top.qinhuajun.collectserver.collectci.application.dto;
 
-import lombok.Value;
+import lombok.*;
 
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class HostDTO {
     Long id;
     String hostname;

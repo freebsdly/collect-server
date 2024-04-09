@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 public class HostDAO {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
     @Column(length = 100)

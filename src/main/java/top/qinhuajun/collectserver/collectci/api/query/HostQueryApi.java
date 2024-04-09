@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.qinhuajun.collectserver.collectci.api.doc.HostQueryApiDoc;
 import top.qinhuajun.collectserver.collectci.api.query.vo.HostQueryVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.PageVo;
-import top.qinhuajun.collectserver.collectci.api.query.vo.PayloadVo;
+import top.qinhuajun.collectserver.common.vo.PageVO;
+import top.qinhuajun.collectserver.common.vo.PayloadVO;
 import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.HostQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
@@ -27,16 +26,16 @@ public class HostQueryApi implements HostQueryApiDoc {
     }
 
     @GetMapping(path = {"/{id}"})
-    public PayloadVo<HostDTO> queryHost(@PathVariable(name = "id", required = true) Long id) {
+    public PayloadVO<HostDTO> queryHost(@PathVariable(name = "id", required = true) Long id) {
         HostDTO hostDTO = hostQueryService.queryHost(id);
-        return PayloadVo.success(hostDTO);
+        return PayloadVO.success(hostDTO);
     }
 
     @GetMapping
-    public PayloadVo<PageVo<HostDTO>> queryHosts(HostQueryVO query) {
+    public PayloadVO<PageVO<HostDTO>> queryHosts(HostQueryVO query) {
         HostQueryDTO queryDTO = VOMapper.INSTANCE.toDTO(query);
         Page<HostDTO> page = hostQueryService.queryHosts(queryDTO);
-        PageVo<HostDTO> host = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
-        return PayloadVo.success(host);
+        PageVO<HostDTO> host = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
+        return PayloadVO.success(host);
     }
 }
