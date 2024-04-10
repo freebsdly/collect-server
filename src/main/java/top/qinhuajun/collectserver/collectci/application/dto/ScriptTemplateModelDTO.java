@@ -9,15 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageQueryDTO {
-    private int pageSize;
+public class ScriptTemplateModelDTO {
 
-    private int pageNum;
-
-    public int getPageNum() {
-        if (pageNum >= 1) {
-            return pageNum - 1;
-        }
-        return 0;
-    }
+    private String host;
+    private String server;
 }

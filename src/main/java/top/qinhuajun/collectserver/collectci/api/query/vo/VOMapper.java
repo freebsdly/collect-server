@@ -9,10 +9,7 @@ import top.qinhuajun.collectserver.collectci.api.command.vo.HostCreateVO;
 import top.qinhuajun.collectserver.collectci.api.command.vo.HostUpdateVO;
 import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateCreateVO;
 import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateUpdateVO;
-import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
-import top.qinhuajun.collectserver.collectci.application.dto.HostQueryDTO;
-import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateDTO;
-import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateQueryDTO;
+import top.qinhuajun.collectserver.collectci.application.dto.*;
 import top.qinhuajun.collectserver.common.vo.PageVO;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
@@ -39,4 +36,6 @@ public interface VOMapper {
     ScriptTemplateDTO toDTO(ScriptTemplateCreateVO vo);
 
     ScriptTemplateDTO toDTO(ScriptTemplateUpdateVO vo);
+
+    HostScriptQueryDTO toDTO(HostScriptQueryVO vo);
 }

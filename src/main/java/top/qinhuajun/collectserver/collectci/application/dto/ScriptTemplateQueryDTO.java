@@ -13,14 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 public class ScriptTemplateQueryDTO extends PageQueryDTO {
 
-    String name;
-    String format;
-    String suffix;
+    private  String name;
+    private String format;
+    private String suffix;
 
-    List<String> names;
+    private  List<String> names;
 
-    List<String> formats;
+    private  List<String> formats;
 
-    List<String> suffixs;
+    private List<String> suffixs;
 
 }

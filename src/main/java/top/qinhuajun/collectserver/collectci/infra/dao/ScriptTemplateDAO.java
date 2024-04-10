@@ -40,4 +40,9 @@ public class ScriptTemplateDAO {
     @NotNull
     private String content;
 
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    String os;
+
 }

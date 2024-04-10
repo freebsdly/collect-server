@@ -7,9 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HostDTO {
-    Long id;
-    String hostname;
-    String ip;
-    String app;
-    String env;
+    private Long id;
+    private String hostname;
+    private String ip;
+    private String app;
+    private String env;
+    private String os;
 }

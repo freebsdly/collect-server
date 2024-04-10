@@ -18,4 +18,7 @@ public class ScriptTemplateCreateVO {
 
     @Schema(example = "ls $env:", requiredMode = Schema.RequiredMode.REQUIRED)
     String content;
+
+    @Schema(example = "windows", requiredMode = Schema.RequiredMode.REQUIRED)
+    String os;
 }

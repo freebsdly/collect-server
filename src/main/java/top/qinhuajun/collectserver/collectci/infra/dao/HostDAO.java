@@ -21,7 +21,7 @@ public class HostDAO {
     @Column(length = 100)
     private String hostname;
 
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     @NotBlank
     @NotEmpty
     @NotNull
@@ -34,5 +34,11 @@ public class HostDAO {
 
     @Column(length = 50)
     private String env;
+
+    @NotEmpty
+    @NotNull
+    @Column(length = 50)
+    private String os;
+
 
 }

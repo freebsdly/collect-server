@@ -17,4 +17,7 @@ public class HostUpdateVO {
 
     @Schema(example = "uat", requiredMode = Schema.RequiredMode.REQUIRED)
     String env;
+
+    @Schema(example = "windows", requiredMode = Schema.RequiredMode.REQUIRED)
+    String os;
 }

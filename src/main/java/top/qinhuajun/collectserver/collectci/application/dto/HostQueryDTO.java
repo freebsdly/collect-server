@@ -10,15 +10,17 @@ import java.util.List;
 @NoArgsConstructor
 public class HostQueryDTO extends PageQueryDTO {
 
-    String hostname;
+    private String hostname;
 
-    String ip;
+    private String ip;
 
-    List<String> hostnames;
+    private String os;
 
-    List<String> ips;
+    private List<String> hostnames;
 
-    List<String> apps;
+    private List<String> ips;
 
-    List<String> envs;
+    private List<String> apps;
+
+    private List<String> envs;
 }

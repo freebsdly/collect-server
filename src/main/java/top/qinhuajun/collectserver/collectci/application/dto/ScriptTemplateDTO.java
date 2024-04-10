@@ -15,4 +15,5 @@ public class ScriptTemplateDTO {
     String format;
     String suffix;
     String content;
+    String os;
 }
