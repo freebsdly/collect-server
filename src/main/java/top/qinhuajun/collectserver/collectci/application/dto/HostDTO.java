@@ -13,4 +13,6 @@ public class HostDTO {
     private String app;
     private String env;
     private String os;
+    private String monitor;
+
 }

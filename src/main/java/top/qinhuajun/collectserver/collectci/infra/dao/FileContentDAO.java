@@ -7,26 +7,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_script_templates")
-public class ScriptTemplateDAO {
+@Table(name = "tb_file_contents", uniqueConstraints = {@UniqueConstraint(columnNames = {"ip", "path"})})
+public class FileContentDAO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
     @Column(length = 50, nullable = false)
-    private String name;
+    private String ip;
 
     @Column(length = 50)
-    private String format;
+    private String os;
 
-    @Column(length = 50)
-    private String suffix;
+    @Column(length = 1000, nullable = false)
+    private String path;
 
-    @Column(columnDefinition = "text", nullable = false)
+    @Column(length = 1000)
+    private String status;
+
+    @Column(columnDefinition = "text")
     private String content;
 
-    @Column(length = 50)
-    String os;
 
 }

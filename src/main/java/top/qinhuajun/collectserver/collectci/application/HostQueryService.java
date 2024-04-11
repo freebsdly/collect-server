@@ -11,26 +11,31 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import top.qinhuajun.collectserver.collectci.application.dto.*;
+import top.qinhuajun.collectserver.collectci.infra.FileRepository;
 import top.qinhuajun.collectserver.collectci.infra.HostRepository;
 import top.qinhuajun.collectserver.collectci.infra.ScriptTemplateRepository;
+import top.qinhuajun.collectserver.collectci.infra.dao.FileDAO;
 import top.qinhuajun.collectserver.collectci.infra.dao.HostDAO;
 import top.qinhuajun.collectserver.collectci.infra.dao.QHostDAO;
 import top.qinhuajun.collectserver.collectci.infra.dao.ScriptTemplateDAO;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
 
 @Service
 @Slf4j
 public class HostQueryService {
 
     final HostRepository hostRepository;
+    final FileRepository fileRepository;
     final ScriptTemplateRepository scriptTemplateRepository;
     final Configuration freemarkerConfig;
 
     @Autowired
-    public HostQueryService(HostRepository hostRepository, ScriptTemplateRepository scriptTemplateRepository) {
+    public HostQueryService(HostRepository hostRepository, FileRepository fileRepository, ScriptTemplateRepository scriptTemplateRepository) {
         this.hostRepository = hostRepository;
+        this.fileRepository = fileRepository;
         this.scriptTemplateRepository = scriptTemplateRepository;
         this.freemarkerConfig = initFreemarkerTemplateEngine();
     }
@@ -75,10 +80,12 @@ public class HostQueryService {
     public String generateScript(HostScriptQueryDTO dto) {
         HostDAO hostDAO = hostRepository.findByIp(dto.getIp()).orElseThrow(() -> new RuntimeException(String.format("can not find host by ip: %s", dto.getIp())));
         ScriptTemplateDAO scriptTemplateDAO = scriptTemplateRepository.findByOs(hostDAO.getOs()).orElseThrow(() -> new RuntimeException(String.format("can not find template by os: %s", hostDAO.getOs())));
+        List<String> files = fileRepository.findByHostId(hostDAO.getId()).stream().map(FileDAO::getPath).toList();
         String templateContent = scriptTemplateDAO.getContent();
         ScriptTemplateModelDTO scriptTemplateModelDTO = new ScriptTemplateModelDTO();
         scriptTemplateModelDTO.setHost(hostDAO.getIp());
         scriptTemplateModelDTO.setServer("10.102.79.208:8080");
+        scriptTemplateModelDTO.setFiles(files);
         return generateScript(templateContent, scriptTemplateModelDTO);
     }
 
