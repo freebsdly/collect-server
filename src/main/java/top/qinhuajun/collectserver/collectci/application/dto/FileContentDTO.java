@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileContentDTO implements Serializable {
+public class FileContentDTO extends WriteTimeDTO implements Serializable {
     private Long id;
     private String ip;
     private String os;

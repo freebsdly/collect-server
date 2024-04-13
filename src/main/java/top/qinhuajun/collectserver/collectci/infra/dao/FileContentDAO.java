@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_file_contents", uniqueConstraints = {@UniqueConstraint(columnNames = {"ip", "path"})})
-public class FileContentDAO {
+public class FileContentDAO extends CommonDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

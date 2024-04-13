@@ -12,10 +12,10 @@ import top.qinhuajun.collectserver.collectci.infra.FileRepository;
 import top.qinhuajun.collectserver.collectci.infra.HostRepository;
 import top.qinhuajun.collectserver.collectci.infra.dao.FileContentDAO;
 import top.qinhuajun.collectserver.collectci.infra.dao.FileDAO;
-import top.qinhuajun.collectserver.collectci.infra.dao.HostDAO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -34,8 +34,9 @@ public class FileCommandService {
         this.fileSyncCommandService = fileSyncCommandService;
     }
 
+    @Transactional
     public Long createHostFile(FileDTO dto) {
-        HostDAO host = hostRepository.findById(dto.getHost().getId()).orElseThrow(() -> new RuntimeException(String.format("can not find host with id %s", dto.getHost().getId())));
+        hostRepository.findById(dto.getHost().getId()).orElseThrow(() -> new RuntimeException(String.format("can not find host with id %s", dto.getHost().getId())));
         FileDAO entity = DTOMapper.INSTANCE.toEntity(dto);
         fileRepository.save(entity);
         return entity.getId();
@@ -46,22 +47,36 @@ public class FileCommandService {
         return dto.stream().map(this::createHostFile).toList();
     }
 
-    public void removeHostFile(FileDTO dto) {
-        fileRepository.delete(DTOMapper.INSTANCE.toEntity(dto));
+    @Transactional
+    public void updateHostFile(FileDTO dto) {
+        FileDAO entity = fileRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException(String.format("can not find file with id %s", dto.getId())));
+        DTOMapper.INSTANCE.partialUpdate(dto, entity);
+        fileRepository.save(entity);
     }
 
     @Transactional
-    public void removeHostFiles(List<FileDTO> dto) {
-        dto.forEach(this::removeHostFile);
+    public void updateHostFiles(List<FileDTO> dto) {
+        dto.forEach(this::updateHostFile);
     }
 
     @Transactional
-    public Long createFileContent(FileContentDTO dto) {
-        FileContentDAO entity = DTOMapper.INSTANCE.toEntity(dto);
+    public void removeHostFile(Long id) {
+        fileRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("can not find file with id %s", id)));
+        fileContentRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void removeHostFiles(Set<Long> ids) {
+        ids.forEach(this::removeHostFile);
+    }
+
+    @Transactional
+    public void createFileContent(FileContentDTO dto) {
         Optional<FileContentDAO> exist = fileContentRepository.findByIpAndPath(dto.getIp(), dto.getPath());
-        exist.ifPresent(fileContentDAO -> entity.setId(fileContentDAO.getId()));
-        fileContentRepository.save(entity);
-        fileSyncCommandService.add("record", dto);
-        return entity.getId();
+        exist.ifPresent(entity ->{
+            DTOMapper.INSTANCE.partialUpdate(dto, entity);
+            fileContentRepository.save(entity);
+            fileSyncCommandService.add("record", dto);
+        });
     }
 }

@@ -8,9 +8,9 @@ import lombok.Value;
 import java.util.Set;
 
 @Value
-@Schema(name = "删除主机参数")
-public class HostRemoveVO {
+@Schema(name = "删除主机文件参数")
+public class FileRemoveVO {
 
-    @Parameter(description = "主机ID列表", required = true, in = ParameterIn.QUERY)
+    @Parameter(description = "主机文件ID列表", required = true, in = ParameterIn.QUERY)
     Set<Long> ids;
 }

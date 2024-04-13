@@ -40,7 +40,7 @@ public class HostQueryService {
         this.freemarkerConfig = initFreemarkerTemplateEngine();
     }
 
-    public Configuration initFreemarkerTemplateEngine() {
+    private Configuration initFreemarkerTemplateEngine() {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_32);
         configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         configuration.setDefaultEncoding("UTF-8");

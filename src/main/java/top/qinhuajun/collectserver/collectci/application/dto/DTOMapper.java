@@ -4,7 +4,7 @@ import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import top.qinhuajun.collectserver.collectci.infra.dao.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {DTOMapper.class})
+@Mapper
 public interface DTOMapper {
 
     DTOMapper INSTANCE = Mappers.getMapper(DTOMapper.class);
@@ -27,6 +27,7 @@ public interface DTOMapper {
 
     FileContentDTO toDto(FileContentDAO fileContentDAO);
 
+    @Mapping(target = "createAt", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     FileContentDAO partialUpdate(FileContentDTO fileContentDTO, @MappingTarget FileContentDAO fileContentDAO);
 

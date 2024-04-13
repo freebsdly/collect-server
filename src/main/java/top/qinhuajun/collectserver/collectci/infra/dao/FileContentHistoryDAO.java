@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_file_content_history")
-public class FileContentHistoryDAO {
+public class FileContentHistoryDAO extends CommonDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
