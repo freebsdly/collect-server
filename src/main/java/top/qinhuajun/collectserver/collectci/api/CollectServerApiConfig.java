@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver;
+package top.qinhuajun.collectserver.collectci.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

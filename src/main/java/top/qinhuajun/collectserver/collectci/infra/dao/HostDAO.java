@@ -40,5 +40,6 @@ public class HostDAO {
     @Column(length = 50)
     private String os;
 
-
+    @Column(length = 50)
+    private String monitor;
 }

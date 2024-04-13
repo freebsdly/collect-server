@@ -11,9 +11,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScriptTemplateModelDTO {
+public class FileQueryDTO extends PageQueryDTO {
+    private String path;
+    private String hostIp;
 
-    private String host;
-    private String server;
-    private List<String> files;
+    private List<String> paths;
+    private List<String> hostIps;
 }

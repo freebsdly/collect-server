@@ -1,14 +1,9 @@
 package top.qinhuajun.collectserver.collectci.api.query.vo;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
-import top.qinhuajun.collectserver.collectci.api.command.vo.HostCreateVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.HostUpdateVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateCreateVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateUpdateVO;
+import top.qinhuajun.collectserver.collectci.api.command.vo.*;
 import top.qinhuajun.collectserver.collectci.application.dto.*;
 import top.qinhuajun.collectserver.common.vo.PageVO;
 
@@ -31,6 +26,9 @@ public interface VOMapper {
 
     HostDTO toDTO(HostUpdateVO vo);
 
+    @Named("hostIdToDTO")
+    HostDTO toDTO(Long id);
+
     ScriptTemplateQueryDTO toDTO(ScriptTemplateQueryVO vo);
 
     ScriptTemplateDTO toDTO(ScriptTemplateCreateVO vo);
@@ -38,4 +36,14 @@ public interface VOMapper {
     ScriptTemplateDTO toDTO(ScriptTemplateUpdateVO vo);
 
     HostScriptQueryDTO toDTO(HostScriptQueryVO vo);
+
+    @Mapping(source = "host", target = "host.id")
+    FileDTO toDTO(FileCreateVO vo);
+
+    @Mapping(source = "host", target = "host.id")
+    FileDTO toDTO(FileUpdateVO vo);
+
+    FileQueryDTO toDTO(FileQueryVO vo);
+
+    FileContentDTO toDTO(PushFileCreateVO vo);
 }

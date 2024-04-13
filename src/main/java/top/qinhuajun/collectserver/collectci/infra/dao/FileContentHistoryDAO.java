@@ -7,26 +7,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_script_templates")
-public class ScriptTemplateDAO {
+@Table(name = "tb_file_content_history")
+public class FileContentHistoryDAO extends CommonDAO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
-    @Column(length = 50, nullable = false)
-    private String name;
+    @Column(length = 50)
+    private String ip;
 
     @Column(length = 50)
-    private String format;
+    private String os;
 
-    @Column(length = 50)
-    private String suffix;
 
-    @Column(columnDefinition = "text", nullable = false)
+    @Column(length = 1000)
+    private String path;
+    @Column(length = 1000)
+    private String status;
+
+    @Column(columnDefinition = "text")
     private String content;
 
-    @Column(length = 50)
-    String os;
 
 }

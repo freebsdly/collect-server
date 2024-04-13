@@ -11,9 +11,9 @@ import top.qinhuajun.collectserver.common.vo.PayloadVO;
 @Tag(name = "脚本模板相关接口")
 public interface ScriptTemplateQueryApiDoc {
 
-    @Operation(description = "获取模板详情")
+    @Operation(summary = "获取模板详情",description = "获取模板详情")
     PayloadVO<ScriptTemplateDTO> queryScriptTemplate(Long id);
 
-    @Operation(description = "查询模板列表")
+    @Operation(summary = "查询模板列表", description = "查询模板列表")
     PayloadVO<PageVO<ScriptTemplateDTO>> queryScriptTemplates(@ParameterObject ScriptTemplateQueryVO query);
 }

@@ -2,10 +2,9 @@ package top.qinhuajun.collectserver.collectci.application.dto;
 
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-import top.qinhuajun.collectserver.collectci.infra.dao.HostDAO;
-import top.qinhuajun.collectserver.collectci.infra.dao.ScriptTemplateDAO;
+import top.qinhuajun.collectserver.collectci.infra.dao.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper
 public interface DTOMapper {
 
     DTOMapper INSTANCE = Mappers.getMapper(DTOMapper.class);
@@ -23,4 +22,25 @@ public interface DTOMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     ScriptTemplateDAO partialUpdate(ScriptTemplateDTO dto, @MappingTarget ScriptTemplateDAO dao);
+
+    FileContentDAO toEntity(FileContentDTO fileContentDTO);
+
+    FileContentDTO toDto(FileContentDAO fileContentDAO);
+
+    @Mapping(target = "createAt", ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    FileContentDAO partialUpdate(FileContentDTO fileContentDTO, @MappingTarget FileContentDAO fileContentDAO);
+
+    FileContentHistoryDAO toHistoryEntity(FileContentDTO dto);
+
+    FileContentDTO toDto(FileContentHistoryDAO dao);
+
+    HostDAO toEntity(HostDAO hostDAO);
+
+    FileDAO toEntity(FileDTO fileDTO);
+
+    FileDTO toDto(FileDAO fileDAO);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    FileDAO partialUpdate(FileDTO fileDTO, @MappingTarget FileDAO fileDAO);
 }

@@ -12,12 +12,12 @@ import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
 @Tag(name = "主机相关接口")
 public interface HostQueryApiDoc {
 
-    @Operation(description = "获取主机详情")
+    @Operation(summary = "获取主机详情", description = "获取主机详情")
     PayloadVO<HostDTO> queryHost(Long id);
 
-    @Operation(description = "查询主机列表")
+    @Operation(summary = "查询主机列表", description = "查询主机列表")
     PayloadVO<PageVO<HostDTO>> queryHosts(@ParameterObject HostQueryVO query);
 
-    @Operation(description = "查询主机采集脚本内容")
+    @Operation(summary = "查询主机采集脚本内容", description = "查询主机采集脚本内容")
     String queryHostScript(@ParameterObject HostScriptQueryVO vo);
 }

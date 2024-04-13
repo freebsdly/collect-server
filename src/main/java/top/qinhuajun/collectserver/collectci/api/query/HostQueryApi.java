@@ -27,8 +27,8 @@ public class HostQueryApi implements HostQueryApiDoc {
         this.hostQueryService = hostQueryService;
     }
 
-    @GetMapping(path = {"/{id}"})
-    public PayloadVO<HostDTO> queryHost(@PathVariable(name = "id", required = true) Long id) {
+    @GetMapping(path = {"/{hostId}"})
+    public PayloadVO<HostDTO> queryHost(@PathVariable(name = "hostId", required = true) Long id) {
         HostDTO hostDTO = hostQueryService.queryHost(id);
         return PayloadVO.success(hostDTO);
     }
@@ -37,8 +37,8 @@ public class HostQueryApi implements HostQueryApiDoc {
     public PayloadVO<PageVO<HostDTO>> queryHosts(HostQueryVO query) {
         HostQueryDTO queryDTO = VOMapper.INSTANCE.toDTO(query);
         Page<HostDTO> page = hostQueryService.queryHosts(queryDTO);
-        PageVO<HostDTO> host = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
-        return PayloadVO.success(host);
+        PageVO<HostDTO> hosts = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
+        return PayloadVO.success(hosts);
     }
 
     @GetMapping(path = "/scripts")

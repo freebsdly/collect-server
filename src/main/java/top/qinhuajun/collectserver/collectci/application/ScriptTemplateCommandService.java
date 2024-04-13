@@ -22,18 +22,21 @@ public class ScriptTemplateCommandService {
         this.scriptTemplateRepository = scriptTemplateRepository;
     }
 
+    @Transactional
     public Long createScriptTemplate(ScriptTemplateDTO dto) {
         ScriptTemplateDAO entity = DTOMapper.INSTANCE.toEntity(dto);
         scriptTemplateRepository.save(entity);
         return entity.getId();
     }
 
+    @Transactional
     public void updateScriptTemplate(ScriptTemplateDTO dto) {
-        ScriptTemplateDAO entity = DTOMapper.INSTANCE.toEntity(dto);
-        scriptTemplateRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException(String.format("can not find template with id:%s", dto.getId())));
+        ScriptTemplateDAO entity = scriptTemplateRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException(String.format("can not find template with id:%s", dto.getId())));
+        DTOMapper.INSTANCE.partialUpdate(dto, entity);
         scriptTemplateRepository.save(entity);
     }
 
+    @Transactional
     public void removeScriptTemplate(Long id) {
         scriptTemplateRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("can not find template with id:%s", id)));
         scriptTemplateRepository.deleteById(id);

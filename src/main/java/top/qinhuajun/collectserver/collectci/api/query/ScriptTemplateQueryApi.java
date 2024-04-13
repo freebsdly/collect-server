@@ -25,8 +25,8 @@ public class ScriptTemplateQueryApi implements ScriptTemplateQueryApiDoc {
         this.scriptTemplateQueryService = scriptTemplateQueryService;
     }
 
-    @GetMapping(path = "/{id}")
-    public PayloadVO<ScriptTemplateDTO> queryScriptTemplate(@PathVariable(name = "id") Long id) {
+    @GetMapping(path = "/{templateId}")
+    public PayloadVO<ScriptTemplateDTO> queryScriptTemplate(@PathVariable(name = "templateId") Long id) {
         ScriptTemplateDTO scriptTemplateDTO = scriptTemplateQueryService.queryScriptTemplate(id);
         return PayloadVO.success(scriptTemplateDTO);
     }

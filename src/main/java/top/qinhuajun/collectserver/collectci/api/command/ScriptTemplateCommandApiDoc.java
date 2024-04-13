@@ -17,14 +17,14 @@ import top.qinhuajun.collectserver.common.vo.PayloadVO;
 @Tag(name = "脚本模板相关接口")
 public interface ScriptTemplateCommandApiDoc {
 
-    @Operation(description = "创建脚本模板")
+    @Operation(summary = "创建脚本模板", description = "创建脚本模板")
     @RequestBody(description = "请求体json", required = true, content = @Content(
             mediaType = MediaType.APPLICATION_JSON_VALUE,
             schema = @Schema(implementation = ScriptTemplateCreateVO.class)
     ))
     PayloadVO<Long> createScriptTemplate(ScriptTemplateCreateVO vo);
 
-    @Operation(description = "更新脚本模板")
+    @Operation(summary = "更新脚本模板", description = "更新脚本模板")
     @Parameter(description = "主机ID", required = true, in = ParameterIn.PATH)
     @RequestBody(description = "请求体json", required = true, content = @Content(
             mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -32,10 +32,10 @@ public interface ScriptTemplateCommandApiDoc {
     ))
     PayloadVO<String> updateScriptTemplate(Long id, ScriptTemplateUpdateVO vo);
 
-    @Operation(description = "删除脚本模板")
+    @Operation(summary = "删除脚本模板", description = "删除脚本模板")
     @Parameter(description = "主机ID", required = true, in = ParameterIn.PATH)
     PayloadVO<String> removeScriptTemplate(Long id);
 
-    @Operation(description = "批量删除脚本模板")
+    @Operation(summary = "批量删除脚本模板", description = "批量删除脚本模板")
     PayloadVO<String> removeScriptTemplates(@ParameterObject ScriptTemplateRemoveVO vo);
 }
