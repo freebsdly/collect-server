@@ -2,10 +2,7 @@ package top.qinhuajun.collectserver.collectci.api.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.qinhuajun.collectserver.collectci.application.HostQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.HostQueryDTO;
@@ -31,7 +28,7 @@ public class HostQueryApi implements HostQueryApiDoc {
     }
 
     @GetMapping
-    public Payload<PageVO<HostDTO>> queryHosts(HostQueryOptions query) {
+    public Payload<PageVO<HostDTO>> queryHosts(@ModelAttribute HostQueryOptions query) {
         HostQueryDTO queryDTO = QueryApiMapper.INSTANCE.toDTO(query);
         Page<HostDTO> page = hostQueryService.queryHosts(queryDTO);
         PageVO<HostDTO> hosts = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), page);
@@ -39,7 +36,7 @@ public class HostQueryApi implements HostQueryApiDoc {
     }
 
     @GetMapping(path = "/scripts")
-    public String queryHostScript(HostScriptQueryOptions vo) {
+    public String queryHostScript(@ModelAttribute HostScriptQueryOptions vo) {
         HostScriptQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(vo);
         return hostQueryService.generateScript(dto);
     }

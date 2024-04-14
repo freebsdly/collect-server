@@ -2,10 +2,7 @@ package top.qinhuajun.collectserver.collectci.api.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.qinhuajun.collectserver.collectci.application.ScriptTemplateQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateQueryDTO;
@@ -30,7 +27,7 @@ public class ScriptTemplateQueryApi implements ScriptTemplateQueryApiDoc {
     }
 
     @GetMapping
-    public Payload<PageVO<ScriptTemplateDTO>> queryScriptTemplates(ScriptTemplateQueryOptions query) {
+    public Payload<PageVO<ScriptTemplateDTO>> queryScriptTemplates(@ModelAttribute ScriptTemplateQueryOptions query) {
         ScriptTemplateQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(query);
         Page<ScriptTemplateDTO> templates = scriptTemplateQueryService.queryScriptTemplates(dto);
         PageVO<ScriptTemplateDTO> pageVo = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), templates);

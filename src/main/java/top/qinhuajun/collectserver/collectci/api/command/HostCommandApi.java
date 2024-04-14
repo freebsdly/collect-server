@@ -39,7 +39,7 @@ public class HostCommandApi implements HostCommandApiDoc {
     }
 
     @DeleteMapping
-    public Payload<String> removeHosts(HostRemoveOptions vo) {
+    public Payload<String> removeHosts(@ModelAttribute HostRemoveOptions vo) {
         hostCommandService.removeHosts(vo.getIds());
         return Payload.success(null);
     }

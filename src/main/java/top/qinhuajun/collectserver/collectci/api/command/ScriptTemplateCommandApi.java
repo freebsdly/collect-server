@@ -39,7 +39,7 @@ public class ScriptTemplateCommandApi implements ScriptTemplateCommandApiDoc {
     }
 
     @DeleteMapping
-    public Payload<String> removeScriptTemplates(ScriptTemplateRemoveOptions vo) {
+    public Payload<String> removeScriptTemplates(@ModelAttribute ScriptTemplateRemoveOptions vo) {
         scriptTemplateCommandService.removeScriptTemplates(vo.getIds());
         return Payload.success(null);
     }

@@ -1,5 +1,6 @@
 package top.qinhuajun.collectserver.collectci.api.query;
 
+import lombok.NoArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;

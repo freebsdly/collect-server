@@ -2,10 +2,7 @@ package top.qinhuajun.collectserver.collectci.api.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.qinhuajun.collectserver.collectci.application.FileQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.FileDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.FileQueryDTO;
@@ -30,7 +27,7 @@ public class FileQueryApi implements FileQueryApiDoc {
     }
 
     @GetMapping
-    public Payload<PageVO<FileDTO>> queryFiles(FileQueryOptions query) {
+    public Payload<PageVO<FileDTO>> queryFiles(@ModelAttribute FileQueryOptions query) {
         FileQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(query);
         Page<FileDTO> page = fileQueryService.getFiles(dto);
         PageVO<FileDTO> files = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), page);

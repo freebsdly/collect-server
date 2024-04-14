@@ -40,7 +40,7 @@ public class FileCommandApi implements FileCommandApiDoc{
     }
 
     @DeleteMapping
-    public Payload<String> removeHostFiles(FileRemoveOptions vo) {
+    public Payload<String> removeHostFiles(@ModelAttribute FileRemoveOptions vo) {
         fileCommandService.removeHostFiles(vo.getIds());
         return Payload.success();
     }

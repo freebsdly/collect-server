@@ -1,10 +1,7 @@
 package top.qinhuajun.collectserver.collectci.api.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.qinhuajun.collectserver.collectci.application.FileCommandService;
 import top.qinhuajun.collectserver.collectci.application.dto.FileContentDTO;
 import top.qinhuajun.collectserver.common.api.Payload;
@@ -21,7 +18,7 @@ public class PushFileCommandApi implements PushFileCommandApiDoc {
     }
 
     @PostMapping
-    public Payload<String> pushFile(PushFileCreateOptions vo, @RequestBody(required = false) String content) {
+    public Payload<String> pushFile(@ModelAttribute PushFileCreateOptions vo, @RequestBody(required = false) String content) {
         FileContentDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         dto.setContent(content);
         fileCommandService.createFileContent(dto);
