@@ -2,13 +2,9 @@ package top.qinhuajun.collectserver.collectci.api.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.qinhuajun.collectserver.collectci.api.command.vo.HostCreateVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.HostRemoveVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.HostUpdateVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.HostCommandService;
 import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/hosts")
@@ -22,29 +18,29 @@ public class HostCommandApi implements HostCommandApiDoc {
     }
 
     @PostMapping
-    public PayloadVO<Long> createHost(@RequestBody HostCreateVO vo) {
-        HostDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<Long> createHost(@RequestBody HostCreateOptions vo) {
+        HostDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         Long id = hostCommandService.createHost(dto);
-        return PayloadVO.success(id);
+        return Payload.success(id);
     }
 
     @PutMapping(path = "/{id}")
-    public PayloadVO<String> updateHost(@PathVariable(name = "id") Long id, @RequestBody HostUpdateVO vo) {
-        HostDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<String> updateHost(@PathVariable(name = "id") Long id, @RequestBody HostUpdateOptions vo) {
+        HostDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         dto.setId(id);
         hostCommandService.updateHost(dto);
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 
     @DeleteMapping(path = "/{id}")
-    public PayloadVO<String> removeHost(@PathVariable(name = "id") Long id) {
+    public Payload<String> removeHost(@PathVariable(name = "id") Long id) {
         hostCommandService.removeHost(id);
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 
     @DeleteMapping
-    public PayloadVO<String> removeHosts(HostRemoveVO vo) {
+    public Payload<String> removeHosts(HostRemoveOptions vo) {
         hostCommandService.removeHosts(vo.getIds());
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 }

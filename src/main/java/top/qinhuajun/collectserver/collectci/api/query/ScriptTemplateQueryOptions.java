@@ -1,9 +1,9 @@
-package top.qinhuajun.collectserver.collectci.api.query.vo;
+package top.qinhuajun.collectserver.collectci.api.query;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import lombok.*;
-import top.qinhuajun.collectserver.common.vo.PageQueryVO;
+import top.qinhuajun.collectserver.common.api.PageQueryOptions;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScriptTemplateQueryVO extends PageQueryVO {
+public class ScriptTemplateQueryOptions extends PageQueryOptions {
     @Parameter(description = "模板名称", required = false, in = ParameterIn.QUERY)
     List<String> names;
 

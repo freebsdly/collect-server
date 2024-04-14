@@ -2,13 +2,9 @@ package top.qinhuajun.collectserver.collectci.api.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateCreateVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateRemoveVO;
-import top.qinhuajun.collectserver.collectci.api.command.vo.ScriptTemplateUpdateVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.ScriptTemplateCommandService;
 import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateDTO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/scripts/templates")
@@ -22,29 +18,29 @@ public class ScriptTemplateCommandApi implements ScriptTemplateCommandApiDoc {
     }
 
     @PostMapping
-    public PayloadVO<Long> createScriptTemplate(@RequestBody ScriptTemplateCreateVO vo) {
-        ScriptTemplateDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<Long> createScriptTemplate(@RequestBody ScriptTemplateCreateOptions vo) {
+        ScriptTemplateDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         Long id = scriptTemplateCommandService.createScriptTemplate(dto);
-        return PayloadVO.success(id);
+        return Payload.success(id);
     }
 
     @PutMapping(path = "/{id}")
-    public PayloadVO<String> updateScriptTemplate(@PathVariable(name = "id") Long id, @RequestBody ScriptTemplateUpdateVO vo) {
-        ScriptTemplateDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<String> updateScriptTemplate(@PathVariable(name = "id") Long id, @RequestBody ScriptTemplateUpdateOptions vo) {
+        ScriptTemplateDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         dto.setId(id);
         scriptTemplateCommandService.updateScriptTemplate(dto);
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 
     @DeleteMapping(path = "{id}")
-    public PayloadVO<String> removeScriptTemplate(@PathVariable(name = "id") Long id) {
+    public Payload<String> removeScriptTemplate(@PathVariable(name = "id") Long id) {
         scriptTemplateCommandService.removeScriptTemplate(id);
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 
     @DeleteMapping
-    public PayloadVO<String> removeScriptTemplates(ScriptTemplateRemoveVO vo) {
+    public Payload<String> removeScriptTemplates(ScriptTemplateRemoveOptions vo) {
         scriptTemplateCommandService.removeScriptTemplates(vo.getIds());
-        return PayloadVO.success(null);
+        return Payload.success(null);
     }
 }

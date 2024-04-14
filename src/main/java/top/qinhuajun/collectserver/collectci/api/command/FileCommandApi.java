@@ -3,11 +3,9 @@ package top.qinhuajun.collectserver.collectci.api.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.qinhuajun.collectserver.collectci.api.command.vo.*;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.FileCommandService;
 import top.qinhuajun.collectserver.collectci.application.dto.FileDTO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/hosts/files")
@@ -21,29 +19,29 @@ public class FileCommandApi implements FileCommandApiDoc{
     }
 
     @PostMapping
-    public PayloadVO<Long> createHostFile(@RequestBody FileCreateVO vo) {
-        FileDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<Long> createHostFile(@RequestBody FileCreateOptions vo) {
+        FileDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         Long fileId = fileCommandService.createHostFile(dto);
-        return PayloadVO.success(fileId);
+        return Payload.success(fileId);
     }
 
     @PutMapping(path = "/{fileId}")
-    public PayloadVO<String> updateHostFile(@PathVariable(name = "fileId") Long id, FileUpdateVO vo) {
-        FileDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public Payload<String> updateHostFile(@PathVariable(name = "fileId") Long id, FileUpdateOptions vo) {
+        FileDTO dto = CommandApiMapper.INSTANCE.toDTO(vo);
         dto.setId(id);
         fileCommandService.updateHostFile(dto);
-        return PayloadVO.success();
+        return Payload.success();
     }
 
     @DeleteMapping(path = "/{fileId}")
-    public PayloadVO<String> removeHostFile(@PathVariable(name = "fileId") Long id) {
+    public Payload<String> removeHostFile(@PathVariable(name = "fileId") Long id) {
         fileCommandService.removeHostFile(id);
-        return PayloadVO.success();
+        return Payload.success();
     }
 
     @DeleteMapping
-    public PayloadVO<String> removeHostFiles(FileRemoveVO vo) {
+    public Payload<String> removeHostFiles(FileRemoveOptions vo) {
         fileCommandService.removeHostFiles(vo.getIds());
-        return PayloadVO.success();
+        return Payload.success();
     }
 }

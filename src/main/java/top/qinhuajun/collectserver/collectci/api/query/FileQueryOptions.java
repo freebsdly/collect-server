@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.collectci.api.query.vo;
+package top.qinhuajun.collectserver.collectci.api.query;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import top.qinhuajun.collectserver.common.vo.PageQueryVO;
+import top.qinhuajun.collectserver.common.api.PageQueryOptions;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileQueryVO extends PageQueryVO {
+public class FileQueryOptions extends PageQueryOptions {
 
     @Parameter(description = "路径列表", required = false, in = ParameterIn.QUERY)
     List<String> paths;

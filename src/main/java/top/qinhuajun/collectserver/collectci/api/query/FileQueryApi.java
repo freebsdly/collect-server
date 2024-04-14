@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.qinhuajun.collectserver.collectci.api.query.vo.FileQueryVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.FileQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.FileDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.FileQueryDTO;
-import top.qinhuajun.collectserver.common.vo.PageVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.PageVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/hosts/files")
@@ -26,16 +24,16 @@ public class FileQueryApi implements FileQueryApiDoc {
     }
 
     @GetMapping(path = "/{fileId}")
-    public PayloadVO<FileDTO> queryFile(@PathVariable(name = "fileId") Long id) {
+    public Payload<FileDTO> queryFile(@PathVariable(name = "fileId") Long id) {
         FileDTO file = fileQueryService.getFile(id);
-        return PayloadVO.success(file);
+        return Payload.success(file);
     }
 
     @GetMapping
-    public PayloadVO<PageVO<FileDTO>> queryFiles(FileQueryVO query) {
-        FileQueryDTO dto = VOMapper.INSTANCE.toDTO(query);
+    public Payload<PageVO<FileDTO>> queryFiles(FileQueryOptions query) {
+        FileQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(query);
         Page<FileDTO> page = fileQueryService.getFiles(dto);
-        PageVO<FileDTO> files = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
-        return PayloadVO.success(files);
+        PageVO<FileDTO> files = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), page);
+        return Payload.success(files);
     }
 }

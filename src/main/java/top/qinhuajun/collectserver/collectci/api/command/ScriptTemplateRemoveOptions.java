@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.collectci.api.command.vo;
+package top.qinhuajun.collectserver.collectci.api.command;
 
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Value
 @Schema(name = "删除脚本模板参数")
-public class ScriptTemplateRemoveVO {
+public class ScriptTemplateRemoveOptions {
 
     @Parameter(description = "脚本模板ID列表", required = true, in = ParameterIn.QUERY)
     Set<Long> ids;

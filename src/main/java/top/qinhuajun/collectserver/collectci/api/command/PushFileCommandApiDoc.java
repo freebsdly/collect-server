@@ -7,8 +7,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
-import top.qinhuajun.collectserver.collectci.api.command.vo.PushFileCreateVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @Tag(name = "文件推送相关接口")
 public interface PushFileCommandApiDoc {
@@ -18,5 +17,5 @@ public interface PushFileCommandApiDoc {
             mediaType = MediaType.TEXT_PLAIN_VALUE,
             schema = @Schema(implementation = String.class)
     ))
-    PayloadVO<String> pushFile(@ParameterObject PushFileCreateVO vo, String content);
+    Payload<String> pushFile(@ParameterObject PushFileCreateOptions vo, String content);
 }

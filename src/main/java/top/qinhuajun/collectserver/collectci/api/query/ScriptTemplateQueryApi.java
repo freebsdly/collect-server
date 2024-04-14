@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.qinhuajun.collectserver.collectci.api.query.vo.ScriptTemplateQueryVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.ScriptTemplateQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.ScriptTemplateQueryDTO;
-import top.qinhuajun.collectserver.common.vo.PageVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.PageVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/scripts/templates")
@@ -26,16 +24,16 @@ public class ScriptTemplateQueryApi implements ScriptTemplateQueryApiDoc {
     }
 
     @GetMapping(path = "/{templateId}")
-    public PayloadVO<ScriptTemplateDTO> queryScriptTemplate(@PathVariable(name = "templateId") Long id) {
+    public Payload<ScriptTemplateDTO> queryScriptTemplate(@PathVariable(name = "templateId") Long id) {
         ScriptTemplateDTO scriptTemplateDTO = scriptTemplateQueryService.queryScriptTemplate(id);
-        return PayloadVO.success(scriptTemplateDTO);
+        return Payload.success(scriptTemplateDTO);
     }
 
     @GetMapping
-    public PayloadVO<PageVO<ScriptTemplateDTO>> queryScriptTemplates(ScriptTemplateQueryVO query) {
-        ScriptTemplateQueryDTO dto = VOMapper.INSTANCE.toDTO(query);
+    public Payload<PageVO<ScriptTemplateDTO>> queryScriptTemplates(ScriptTemplateQueryOptions query) {
+        ScriptTemplateQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(query);
         Page<ScriptTemplateDTO> templates = scriptTemplateQueryService.queryScriptTemplates(dto);
-        PageVO<ScriptTemplateDTO> pageVo = VOMapper.INSTANCE.toPageVo(query.getPageNum(), templates);
-        return PayloadVO.success(pageVo);
+        PageVO<ScriptTemplateDTO> pageVo = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), templates);
+        return Payload.success(pageVo);
     }
 }

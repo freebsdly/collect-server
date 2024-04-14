@@ -1,11 +1,11 @@
-package top.qinhuajun.collectserver.collectci.api.command.vo;
+package top.qinhuajun.collectserver.collectci.api.command;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
 
 @Value
-@Schema(name = "创建脚本模板请求体")
-public class ScriptTemplateCreateVO {
+@Schema(name = "更新脚本模板请求体")
+public class ScriptTemplateUpdateOptions {
 
     @Schema(example = "template for windows", requiredMode = Schema.RequiredMode.REQUIRED)
     String name;
