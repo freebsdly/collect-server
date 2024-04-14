@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.qinhuajun.collectserver.collectci.api.query.vo.HostQueryVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.HostScriptQueryVO;
-import top.qinhuajun.collectserver.collectci.application.dto.HostScriptQueryDTO;
-import top.qinhuajun.collectserver.common.vo.PageVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.VOMapper;
 import top.qinhuajun.collectserver.collectci.application.HostQueryService;
 import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
 import top.qinhuajun.collectserver.collectci.application.dto.HostQueryDTO;
+import top.qinhuajun.collectserver.collectci.application.dto.HostScriptQueryDTO;
+import top.qinhuajun.collectserver.common.api.PageVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 
 @RestController
 @RequestMapping("/hosts")
@@ -28,22 +25,22 @@ public class HostQueryApi implements HostQueryApiDoc {
     }
 
     @GetMapping(path = {"/{hostId}"})
-    public PayloadVO<HostDTO> queryHost(@PathVariable(name = "hostId", required = true) Long id) {
+    public Payload<HostDTO> queryHost(@PathVariable(name = "hostId", required = true) Long id) {
         HostDTO hostDTO = hostQueryService.queryHost(id);
-        return PayloadVO.success(hostDTO);
+        return Payload.success(hostDTO);
     }
 
     @GetMapping
-    public PayloadVO<PageVO<HostDTO>> queryHosts(HostQueryVO query) {
-        HostQueryDTO queryDTO = VOMapper.INSTANCE.toDTO(query);
+    public Payload<PageVO<HostDTO>> queryHosts(HostQueryOptions query) {
+        HostQueryDTO queryDTO = QueryApiMapper.INSTANCE.toDTO(query);
         Page<HostDTO> page = hostQueryService.queryHosts(queryDTO);
-        PageVO<HostDTO> hosts = VOMapper.INSTANCE.toPageVo(query.getPageNum(), page);
-        return PayloadVO.success(hosts);
+        PageVO<HostDTO> hosts = QueryApiMapper.INSTANCE.toPageVo(query.getPageNum(), page);
+        return Payload.success(hosts);
     }
 
     @GetMapping(path = "/scripts")
-    public String queryHostScript(HostScriptQueryVO vo) {
-        HostScriptQueryDTO dto = VOMapper.INSTANCE.toDTO(vo);
+    public String queryHostScript(HostScriptQueryOptions vo) {
+        HostScriptQueryDTO dto = QueryApiMapper.INSTANCE.toDTO(vo);
         return hostQueryService.generateScript(dto);
     }
 }

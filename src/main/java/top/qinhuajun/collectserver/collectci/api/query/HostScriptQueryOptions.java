@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.collectci.api.query.vo;
+package top.qinhuajun.collectserver.collectci.api.query;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HostScriptQueryVO {
+public class HostScriptQueryOptions {
 
     @Parameter(description = "主机IP", required = true, in = ParameterIn.QUERY)
     private String ip;

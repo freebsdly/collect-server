@@ -1,4 +1,4 @@
-package top.qinhuajun.collectserver.common.vo;
+package top.qinhuajun.collectserver.common.api;
 
 import java.util.List;
 

@@ -3,21 +3,19 @@ package top.qinhuajun.collectserver.collectci.api.query;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
-import top.qinhuajun.collectserver.collectci.api.query.vo.HostQueryVO;
-import top.qinhuajun.collectserver.collectci.api.query.vo.HostScriptQueryVO;
-import top.qinhuajun.collectserver.common.vo.PageVO;
-import top.qinhuajun.collectserver.common.vo.PayloadVO;
+import top.qinhuajun.collectserver.common.api.PageVO;
+import top.qinhuajun.collectserver.common.api.Payload;
 import top.qinhuajun.collectserver.collectci.application.dto.HostDTO;
 
 @Tag(name = "主机相关接口")
 public interface HostQueryApiDoc {
 
     @Operation(summary = "获取主机详情", description = "获取主机详情")
-    PayloadVO<HostDTO> queryHost(Long id);
+    Payload<HostDTO> queryHost(Long id);
 
     @Operation(summary = "查询主机列表", description = "查询主机列表")
-    PayloadVO<PageVO<HostDTO>> queryHosts(@ParameterObject HostQueryVO query);
+    Payload<PageVO<HostDTO>> queryHosts(@ParameterObject HostQueryOptions query);
 
     @Operation(summary = "查询主机采集脚本内容", description = "查询主机采集脚本内容")
-    String queryHostScript(@ParameterObject HostScriptQueryVO vo);
+    String queryHostScript(@ParameterObject HostScriptQueryOptions vo);
 }

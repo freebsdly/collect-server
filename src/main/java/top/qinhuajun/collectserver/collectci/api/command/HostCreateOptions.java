@@ -1,11 +1,11 @@
-package top.qinhuajun.collectserver.collectci.api.command.vo;
+package top.qinhuajun.collectserver.collectci.api.command;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
 
 @Value
 @Schema(name = "创建主机请求体")
-public class HostCreateVO {
+public class HostCreateOptions {
 
     @Schema(example = "HFEA1MESAP01", requiredMode = Schema.RequiredMode.REQUIRED)
     String hostname;
