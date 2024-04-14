@@ -10,3 +10,6 @@ pluginManagement {
 }
 
 rootProject.name = 'collect-server'
+
+org.gradle.java.home=~/.sdkman/candidates/java/17.0.10-graal
+org.gradle.project.GRAALVM_HOME=~/.sdkman/candidates/java/17.0.10-graal
