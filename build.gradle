@@ -83,7 +83,7 @@ graalvmNative {
         main {
             javaLauncher = javaToolchains.launcherFor {
                 languageVersion = JavaLanguageVersion.of(17)
-                vendor = JvmVendorSpec.matching("GraalVM Community")
+                vendor = JvmVendorSpec.matching("GraalVM")
             }
         }
     }
