@@ -37,3 +37,10 @@ out/
 .vscode/
 
 src/main/java/resources/application-dev.properties
+/src/main/resources/META-INF/native-image/.lock
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/jni-config.json
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/predefined-classes-config.json
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/proxy-config.json
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/reflect-config.json
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/resource-config.json
+/src/main/resources/META-INF/native-image/agent-pid1575876-20240414T134448Z.tmp9037305446380398104/serialization-config.json
